@@ -1,5 +1,5 @@
 import numpy as np
-from parser import Transpose, Determinant  # ← this resolves the yellow warning
+from parser import Transpose, Determinant  # ← resolves yellow warning
 
 def generate_python(ast):
     code = ["import numpy as np"]
@@ -7,8 +7,14 @@ def generate_python(ast):
         if isinstance(stmt.expr, list):
             code.append(f"{stmt.id} = np.array({stmt.expr})")
         elif hasattr(stmt.expr, 'left'):
-            op = '+' if stmt.expr.op == '+' else '@'
-            code.append(f"{stmt.id} = {stmt.expr.left} {op} {stmt.expr.right}")
+            if stmt.expr.op == '+':
+                code.append(f"{stmt.id} = np.add({stmt.expr.left}, {stmt.expr.right})")
+            elif stmt.expr.op == '-':
+                code.append(f"{stmt.id} = np.subtract({stmt.expr.left}, {stmt.expr.right})")
+            elif stmt.expr.op == '*':
+                code.append(f"{stmt.id} = np.matmul({stmt.expr.left}, {stmt.expr.right})")
+            elif stmt.expr.op == '/':
+                code.append(f"{stmt.id} = np.divide({stmt.expr.left}, {stmt.expr.right})")
         elif hasattr(stmt.expr, 'matrix'):
             if isinstance(stmt.expr, Transpose):
                 code.append(f"{stmt.id} = {stmt.expr.matrix}.T")

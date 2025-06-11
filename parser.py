@@ -57,7 +57,9 @@ def p_statement_op(p):
 
 def p_op(p):
     '''op : PLUS
-         | TIMES'''
+          | MINUS
+          | TIMES
+          | DIVIDE'''
     p[0] = p[1]
 
 

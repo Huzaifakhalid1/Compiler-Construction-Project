@@ -9,44 +9,48 @@ Rule 3     statement_list -> statement
 Rule 4     statement -> MATRIX ID EQUALS matrix SEMICOLON
 Rule 5     statement -> MATRIX ID EQUALS ID op ID SEMICOLON
 Rule 6     op -> PLUS
-Rule 7     op -> TIMES
-Rule 8     statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
-Rule 9     statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
-Rule 10    statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
-Rule 11    matrix -> LBRACKET row_list RBRACKET
-Rule 12    row_list -> row COMMA row_list
-Rule 13    row_list -> row
-Rule 14    row -> LBRACKET num_list RBRACKET
-Rule 15    num_list -> NUM COMMA num_list
-Rule 16    num_list -> NUM
+Rule 7     op -> MINUS
+Rule 8     op -> TIMES
+Rule 9     op -> DIVIDE
+Rule 10    statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
+Rule 11    statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+Rule 12    statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+Rule 13    matrix -> LBRACKET row_list RBRACKET
+Rule 14    row_list -> row COMMA row_list
+Rule 15    row_list -> row
+Rule 16    row -> LBRACKET num_list RBRACKET
+Rule 17    num_list -> NUM COMMA num_list
+Rule 18    num_list -> NUM
 
 Terminals, with rules where they appear
 
-COMMA                : 12 15
-DETERMINANT          : 9 10
-EQUALS               : 4 5 8 9 10
-ID                   : 4 5 5 5 8 8 9 9 10 10
-LBRACKET             : 11 14
-LPAREN               : 8 9 10
-MATRIX               : 4 5 8 9
-NUM                  : 15 16
+COMMA                : 14 17
+DETERMINANT          : 11 12
+DIVIDE               : 9
+EQUALS               : 4 5 10 11 12
+ID                   : 4 5 5 5 10 10 11 11 12 12
+LBRACKET             : 13 16
+LPAREN               : 10 11 12
+MATRIX               : 4 5 10 11
+MINUS                : 7
+NUM                  : 17 18
 PLUS                 : 6
-RBRACKET             : 11 14
-RPAREN               : 8 9 10
-SCALAR               : 10
-SEMICOLON            : 4 5 8 9 10
-TIMES                : 7
-TRANSPOSE            : 8
+RBRACKET             : 13 16
+RPAREN               : 10 11 12
+SCALAR               : 12
+SEMICOLON            : 4 5 10 11 12
+TIMES                : 8
+TRANSPOSE            : 10
 error                : 
 
 Nonterminals, with rules where they appear
 
 matrix               : 4
-num_list             : 14 15
+num_list             : 16 17
 op                   : 5
 program              : 0
-row                  : 12 13
-row_list             : 11 12
+row                  : 14 15
+row_list             : 13 14
 statement            : 2 3
 statement_list       : 1 2
 
@@ -60,9 +64,9 @@ state 0
     (3) statement_list -> . statement
     (4) statement -> . MATRIX ID EQUALS matrix SEMICOLON
     (5) statement -> . MATRIX ID EQUALS ID op ID SEMICOLON
-    (8) statement -> . MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
-    (9) statement -> . MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
-    (10) statement -> . SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (10) statement -> . MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
+    (11) statement -> . MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (12) statement -> . SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     MATRIX          shift and go to state 4
     SCALAR          shift and go to state 5
@@ -92,9 +96,9 @@ state 3
     (3) statement_list -> . statement
     (4) statement -> . MATRIX ID EQUALS matrix SEMICOLON
     (5) statement -> . MATRIX ID EQUALS ID op ID SEMICOLON
-    (8) statement -> . MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
-    (9) statement -> . MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
-    (10) statement -> . SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (10) statement -> . MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
+    (11) statement -> . MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (12) statement -> . SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     $end            reduce using rule 3 (statement_list -> statement .)
     MATRIX          shift and go to state 4
@@ -107,15 +111,15 @@ state 4
 
     (4) statement -> MATRIX . ID EQUALS matrix SEMICOLON
     (5) statement -> MATRIX . ID EQUALS ID op ID SEMICOLON
-    (8) statement -> MATRIX . ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
-    (9) statement -> MATRIX . ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (10) statement -> MATRIX . ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
+    (11) statement -> MATRIX . ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     ID              shift and go to state 7
 
 
 state 5
 
-    (10) statement -> SCALAR . ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (12) statement -> SCALAR . ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     ID              shift and go to state 8
 
@@ -131,15 +135,15 @@ state 7
 
     (4) statement -> MATRIX ID . EQUALS matrix SEMICOLON
     (5) statement -> MATRIX ID . EQUALS ID op ID SEMICOLON
-    (8) statement -> MATRIX ID . EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
-    (9) statement -> MATRIX ID . EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (10) statement -> MATRIX ID . EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON
+    (11) statement -> MATRIX ID . EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     EQUALS          shift and go to state 9
 
 
 state 8
 
-    (10) statement -> SCALAR ID . EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (12) statement -> SCALAR ID . EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     EQUALS          shift and go to state 10
 
@@ -148,9 +152,9 @@ state 9
 
     (4) statement -> MATRIX ID EQUALS . matrix SEMICOLON
     (5) statement -> MATRIX ID EQUALS . ID op ID SEMICOLON
-    (8) statement -> MATRIX ID EQUALS . TRANSPOSE LPAREN ID RPAREN SEMICOLON
-    (9) statement -> MATRIX ID EQUALS . DETERMINANT LPAREN ID RPAREN SEMICOLON
-    (11) matrix -> . LBRACKET row_list RBRACKET
+    (10) statement -> MATRIX ID EQUALS . TRANSPOSE LPAREN ID RPAREN SEMICOLON
+    (11) statement -> MATRIX ID EQUALS . DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (13) matrix -> . LBRACKET row_list RBRACKET
 
     ID              shift and go to state 11
     TRANSPOSE       shift and go to state 13
@@ -161,7 +165,7 @@ state 9
 
 state 10
 
-    (10) statement -> SCALAR ID EQUALS . DETERMINANT LPAREN ID RPAREN SEMICOLON
+    (12) statement -> SCALAR ID EQUALS . DETERMINANT LPAREN ID RPAREN SEMICOLON
 
     DETERMINANT     shift and go to state 16
 
@@ -170,10 +174,14 @@ state 11
 
     (5) statement -> MATRIX ID EQUALS ID . op ID SEMICOLON
     (6) op -> . PLUS
-    (7) op -> . TIMES
+    (7) op -> . MINUS
+    (8) op -> . TIMES
+    (9) op -> . DIVIDE
 
     PLUS            shift and go to state 18
-    TIMES           shift and go to state 19
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
 
     op                             shift and go to state 17
 
@@ -181,47 +189,47 @@ state 12
 
     (4) statement -> MATRIX ID EQUALS matrix . SEMICOLON
 
-    SEMICOLON       shift and go to state 20
+    SEMICOLON       shift and go to state 22
 
 
 state 13
 
-    (8) statement -> MATRIX ID EQUALS TRANSPOSE . LPAREN ID RPAREN SEMICOLON
+    (10) statement -> MATRIX ID EQUALS TRANSPOSE . LPAREN ID RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 21
+    LPAREN          shift and go to state 23
 
 
 state 14
 
-    (9) statement -> MATRIX ID EQUALS DETERMINANT . LPAREN ID RPAREN SEMICOLON
+    (11) statement -> MATRIX ID EQUALS DETERMINANT . LPAREN ID RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 22
+    LPAREN          shift and go to state 24
 
 
 state 15
 
-    (11) matrix -> LBRACKET . row_list RBRACKET
-    (12) row_list -> . row COMMA row_list
-    (13) row_list -> . row
-    (14) row -> . LBRACKET num_list RBRACKET
+    (13) matrix -> LBRACKET . row_list RBRACKET
+    (14) row_list -> . row COMMA row_list
+    (15) row_list -> . row
+    (16) row -> . LBRACKET num_list RBRACKET
 
-    LBRACKET        shift and go to state 23
+    LBRACKET        shift and go to state 25
 
-    row_list                       shift and go to state 24
-    row                            shift and go to state 25
+    row_list                       shift and go to state 26
+    row                            shift and go to state 27
 
 state 16
 
-    (10) statement -> SCALAR ID EQUALS DETERMINANT . LPAREN ID RPAREN SEMICOLON
+    (12) statement -> SCALAR ID EQUALS DETERMINANT . LPAREN ID RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 26
+    LPAREN          shift and go to state 28
 
 
 state 17
 
     (5) statement -> MATRIX ID EQUALS ID op . ID SEMICOLON
 
-    ID              shift and go to state 27
+    ID              shift and go to state 29
 
 
 state 18
@@ -233,12 +241,26 @@ state 18
 
 state 19
 
-    (7) op -> TIMES .
+    (7) op -> MINUS .
 
-    ID              reduce using rule 7 (op -> TIMES .)
+    ID              reduce using rule 7 (op -> MINUS .)
 
 
 state 20
+
+    (8) op -> TIMES .
+
+    ID              reduce using rule 8 (op -> TIMES .)
+
+
+state 21
+
+    (9) op -> DIVIDE .
+
+    ID              reduce using rule 9 (op -> DIVIDE .)
+
+
+state 22
 
     (4) statement -> MATRIX ID EQUALS matrix SEMICOLON .
 
@@ -247,117 +269,117 @@ state 20
     $end            reduce using rule 4 (statement -> MATRIX ID EQUALS matrix SEMICOLON .)
 
 
-state 21
-
-    (8) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN . ID RPAREN SEMICOLON
-
-    ID              shift and go to state 28
-
-
-state 22
-
-    (9) statement -> MATRIX ID EQUALS DETERMINANT LPAREN . ID RPAREN SEMICOLON
-
-    ID              shift and go to state 29
-
-
 state 23
 
-    (14) row -> LBRACKET . num_list RBRACKET
-    (15) num_list -> . NUM COMMA num_list
-    (16) num_list -> . NUM
+    (10) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN . ID RPAREN SEMICOLON
 
-    NUM             shift and go to state 31
+    ID              shift and go to state 30
 
-    num_list                       shift and go to state 30
 
 state 24
 
-    (11) matrix -> LBRACKET row_list . RBRACKET
+    (11) statement -> MATRIX ID EQUALS DETERMINANT LPAREN . ID RPAREN SEMICOLON
 
-    RBRACKET        shift and go to state 32
+    ID              shift and go to state 31
 
 
 state 25
 
-    (12) row_list -> row . COMMA row_list
-    (13) row_list -> row .
+    (16) row -> LBRACKET . num_list RBRACKET
+    (17) num_list -> . NUM COMMA num_list
+    (18) num_list -> . NUM
 
-    COMMA           shift and go to state 33
-    RBRACKET        reduce using rule 13 (row_list -> row .)
+    NUM             shift and go to state 33
 
+    num_list                       shift and go to state 32
 
 state 26
 
-    (10) statement -> SCALAR ID EQUALS DETERMINANT LPAREN . ID RPAREN SEMICOLON
+    (13) matrix -> LBRACKET row_list . RBRACKET
 
-    ID              shift and go to state 34
+    RBRACKET        shift and go to state 34
 
 
 state 27
 
-    (5) statement -> MATRIX ID EQUALS ID op ID . SEMICOLON
+    (14) row_list -> row . COMMA row_list
+    (15) row_list -> row .
 
-    SEMICOLON       shift and go to state 35
+    COMMA           shift and go to state 35
+    RBRACKET        reduce using rule 15 (row_list -> row .)
 
 
 state 28
 
-    (8) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID . RPAREN SEMICOLON
+    (12) statement -> SCALAR ID EQUALS DETERMINANT LPAREN . ID RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 36
+    ID              shift and go to state 36
 
 
 state 29
 
-    (9) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID . RPAREN SEMICOLON
+    (5) statement -> MATRIX ID EQUALS ID op ID . SEMICOLON
 
-    RPAREN          shift and go to state 37
+    SEMICOLON       shift and go to state 37
 
 
 state 30
 
-    (14) row -> LBRACKET num_list . RBRACKET
+    (10) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID . RPAREN SEMICOLON
 
-    RBRACKET        shift and go to state 38
+    RPAREN          shift and go to state 38
 
 
 state 31
 
-    (15) num_list -> NUM . COMMA num_list
-    (16) num_list -> NUM .
+    (11) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID . RPAREN SEMICOLON
 
-    COMMA           shift and go to state 39
-    RBRACKET        reduce using rule 16 (num_list -> NUM .)
+    RPAREN          shift and go to state 39
 
 
 state 32
 
-    (11) matrix -> LBRACKET row_list RBRACKET .
+    (16) row -> LBRACKET num_list . RBRACKET
 
-    SEMICOLON       reduce using rule 11 (matrix -> LBRACKET row_list RBRACKET .)
+    RBRACKET        shift and go to state 40
 
 
 state 33
 
-    (12) row_list -> row COMMA . row_list
-    (12) row_list -> . row COMMA row_list
-    (13) row_list -> . row
-    (14) row -> . LBRACKET num_list RBRACKET
+    (17) num_list -> NUM . COMMA num_list
+    (18) num_list -> NUM .
 
-    LBRACKET        shift and go to state 23
+    COMMA           shift and go to state 41
+    RBRACKET        reduce using rule 18 (num_list -> NUM .)
 
-    row                            shift and go to state 25
-    row_list                       shift and go to state 40
 
 state 34
 
-    (10) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID . RPAREN SEMICOLON
+    (13) matrix -> LBRACKET row_list RBRACKET .
 
-    RPAREN          shift and go to state 41
+    SEMICOLON       reduce using rule 13 (matrix -> LBRACKET row_list RBRACKET .)
 
 
 state 35
+
+    (14) row_list -> row COMMA . row_list
+    (14) row_list -> . row COMMA row_list
+    (15) row_list -> . row
+    (16) row -> . LBRACKET num_list RBRACKET
+
+    LBRACKET        shift and go to state 25
+
+    row                            shift and go to state 27
+    row_list                       shift and go to state 42
+
+state 36
+
+    (12) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 43
+
+
+state 37
 
     (5) statement -> MATRIX ID EQUALS ID op ID SEMICOLON .
 
@@ -366,82 +388,82 @@ state 35
     $end            reduce using rule 5 (statement -> MATRIX ID EQUALS ID op ID SEMICOLON .)
 
 
-state 36
-
-    (8) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 42
-
-
-state 37
-
-    (9) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 43
-
-
 state 38
 
-    (14) row -> LBRACKET num_list RBRACKET .
+    (10) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN . SEMICOLON
 
-    COMMA           reduce using rule 14 (row -> LBRACKET num_list RBRACKET .)
-    RBRACKET        reduce using rule 14 (row -> LBRACKET num_list RBRACKET .)
+    SEMICOLON       shift and go to state 44
 
 
 state 39
 
-    (15) num_list -> NUM COMMA . num_list
-    (15) num_list -> . NUM COMMA num_list
-    (16) num_list -> . NUM
-
-    NUM             shift and go to state 31
-
-    num_list                       shift and go to state 44
-
-state 40
-
-    (12) row_list -> row COMMA row_list .
-
-    RBRACKET        reduce using rule 12 (row_list -> row COMMA row_list .)
-
-
-state 41
-
-    (10) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN . SEMICOLON
+    (11) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN . SEMICOLON
 
     SEMICOLON       shift and go to state 45
 
 
+state 40
+
+    (16) row -> LBRACKET num_list RBRACKET .
+
+    COMMA           reduce using rule 16 (row -> LBRACKET num_list RBRACKET .)
+    RBRACKET        reduce using rule 16 (row -> LBRACKET num_list RBRACKET .)
+
+
+state 41
+
+    (17) num_list -> NUM COMMA . num_list
+    (17) num_list -> . NUM COMMA num_list
+    (18) num_list -> . NUM
+
+    NUM             shift and go to state 33
+
+    num_list                       shift and go to state 46
+
 state 42
 
-    (8) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .
+    (14) row_list -> row COMMA row_list .
 
-    MATRIX          reduce using rule 8 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
-    SCALAR          reduce using rule 8 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
-    $end            reduce using rule 8 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
+    RBRACKET        reduce using rule 14 (row_list -> row COMMA row_list .)
 
 
 state 43
 
-    (9) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .
+    (12) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN . SEMICOLON
 
-    MATRIX          reduce using rule 9 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
-    SCALAR          reduce using rule 9 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
-    $end            reduce using rule 9 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    SEMICOLON       shift and go to state 47
 
 
 state 44
 
-    (15) num_list -> NUM COMMA num_list .
+    (10) statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .
 
-    RBRACKET        reduce using rule 15 (num_list -> NUM COMMA num_list .)
+    MATRIX          reduce using rule 10 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
+    SCALAR          reduce using rule 10 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
+    $end            reduce using rule 10 (statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON .)
 
 
 state 45
 
-    (10) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .
+    (11) statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .
 
-    MATRIX          reduce using rule 10 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
-    SCALAR          reduce using rule 10 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
-    $end            reduce using rule 10 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    MATRIX          reduce using rule 11 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    SCALAR          reduce using rule 11 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    $end            reduce using rule 11 (statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+
+
+state 46
+
+    (17) num_list -> NUM COMMA num_list .
+
+    RBRACKET        reduce using rule 17 (num_list -> NUM COMMA num_list .)
+
+
+state 47
+
+    (12) statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .
+
+    MATRIX          reduce using rule 12 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    SCALAR          reduce using rule 12 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
+    $end            reduce using rule 12 (statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON .)
 

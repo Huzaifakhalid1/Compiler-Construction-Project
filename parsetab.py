@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COMMA DETERMINANT EQUALS ID LBRACKET LPAREN MATRIX NUM PLUS RBRACKET RPAREN SCALAR SEMICOLON TIMES TRANSPOSEprogram : statement_liststatement_list : statement statement_list\n| statementstatement : MATRIX ID EQUALS matrix SEMICOLONstatement : MATRIX ID EQUALS ID op ID SEMICOLONop : PLUS\n| TIMESstatement : MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLONstatement : MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLONstatement : SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLONmatrix : LBRACKET row_list RBRACKETrow_list : row COMMA row_list\n| rowrow : LBRACKET num_list RBRACKETnum_list : NUM COMMA num_list\n| NUM'
+_lr_signature = 'COMMA DETERMINANT DIVIDE EQUALS ID LBRACKET LPAREN MATRIX MINUS NUM PLUS RBRACKET RPAREN SCALAR SEMICOLON TIMES TRANSPOSEprogram : statement_liststatement_list : statement statement_list\n| statementstatement : MATRIX ID EQUALS matrix SEMICOLONstatement : MATRIX ID EQUALS ID op ID SEMICOLONop : PLUS\n| MINUS\n| TIMES\n| DIVIDEstatement : MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLONstatement : MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLONstatement : SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLONmatrix : LBRACKET row_list RBRACKETrow_list : row COMMA row_list\n| rowrow : LBRACKET num_list RBRACKETnum_list : NUM COMMA num_list\n| NUM'
     
-_lr_action_items = {'MATRIX':([0,3,20,35,42,43,45,],[4,4,-4,-5,-8,-9,-10,]),'SCALAR':([0,3,20,35,42,43,45,],[5,5,-4,-5,-8,-9,-10,]),'$end':([1,2,3,6,20,35,42,43,45,],[0,-1,-3,-2,-4,-5,-8,-9,-10,]),'ID':([4,5,9,17,18,19,21,22,26,],[7,8,11,27,-6,-7,28,29,34,]),'EQUALS':([7,8,],[9,10,]),'TRANSPOSE':([9,],[13,]),'DETERMINANT':([9,10,],[14,16,]),'LBRACKET':([9,15,33,],[15,23,23,]),'PLUS':([11,],[18,]),'TIMES':([11,],[19,]),'SEMICOLON':([12,27,32,36,37,41,],[20,35,-11,42,43,45,]),'LPAREN':([13,14,16,],[21,22,26,]),'NUM':([23,39,],[31,31,]),'RBRACKET':([24,25,30,31,38,40,44,],[32,-13,38,-16,-14,-12,-15,]),'COMMA':([25,31,38,],[33,39,-14,]),'RPAREN':([28,29,34,],[36,37,41,]),}
+_lr_action_items = {'MATRIX':([0,3,22,37,44,45,47,],[4,4,-4,-5,-10,-11,-12,]),'SCALAR':([0,3,22,37,44,45,47,],[5,5,-4,-5,-10,-11,-12,]),'$end':([1,2,3,6,22,37,44,45,47,],[0,-1,-3,-2,-4,-5,-10,-11,-12,]),'ID':([4,5,9,17,18,19,20,21,23,24,28,],[7,8,11,29,-6,-7,-8,-9,30,31,36,]),'EQUALS':([7,8,],[9,10,]),'TRANSPOSE':([9,],[13,]),'DETERMINANT':([9,10,],[14,16,]),'LBRACKET':([9,15,35,],[15,25,25,]),'PLUS':([11,],[18,]),'MINUS':([11,],[19,]),'TIMES':([11,],[20,]),'DIVIDE':([11,],[21,]),'SEMICOLON':([12,29,34,38,39,43,],[22,37,-13,44,45,47,]),'LPAREN':([13,14,16,],[23,24,28,]),'NUM':([25,41,],[33,33,]),'RBRACKET':([26,27,32,33,40,42,46,],[34,-15,40,-18,-16,-14,-17,]),'COMMA':([27,33,40,],[35,41,-16,]),'RPAREN':([30,31,36,],[38,39,43,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,3,],[2,6,]),'statement':([0,3,],[3,3,]),'matrix':([9,],[12,]),'op':([11,],[17,]),'row_list':([15,33,],[24,40,]),'row':([15,33,],[25,25,]),'num_list':([23,39,],[30,44,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,3,],[2,6,]),'statement':([0,3,],[3,3,]),'matrix':([9,],[12,]),'op':([11,],[17,]),'row_list':([15,35,],[26,42,]),'row':([15,35,],[27,27,]),'num_list':([25,41,],[32,46,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -33,14 +33,16 @@ _lr_productions = [
   ('statement -> MATRIX ID EQUALS matrix SEMICOLON','statement',5,'p_statement_matrix','parser.py',49),
   ('statement -> MATRIX ID EQUALS ID op ID SEMICOLON','statement',7,'p_statement_op','parser.py',54),
   ('op -> PLUS','op',1,'p_op','parser.py',59),
-  ('op -> TIMES','op',1,'p_op','parser.py',60),
-  ('statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_transpose','parser.py',65),
-  ('statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_determinant','parser.py',70),
-  ('statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_scalar_determinant','parser.py',75),
-  ('matrix -> LBRACKET row_list RBRACKET','matrix',3,'p_matrix','parser.py',80),
-  ('row_list -> row COMMA row_list','row_list',3,'p_row_list','parser.py',85),
-  ('row_list -> row','row_list',1,'p_row_list','parser.py',86),
-  ('row -> LBRACKET num_list RBRACKET','row',3,'p_row','parser.py',94),
-  ('num_list -> NUM COMMA num_list','num_list',3,'p_num_list','parser.py',99),
-  ('num_list -> NUM','num_list',1,'p_num_list','parser.py',100),
+  ('op -> MINUS','op',1,'p_op','parser.py',60),
+  ('op -> TIMES','op',1,'p_op','parser.py',61),
+  ('op -> DIVIDE','op',1,'p_op','parser.py',62),
+  ('statement -> MATRIX ID EQUALS TRANSPOSE LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_transpose','parser.py',67),
+  ('statement -> MATRIX ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_determinant','parser.py',72),
+  ('statement -> SCALAR ID EQUALS DETERMINANT LPAREN ID RPAREN SEMICOLON','statement',8,'p_statement_scalar_determinant','parser.py',77),
+  ('matrix -> LBRACKET row_list RBRACKET','matrix',3,'p_matrix','parser.py',82),
+  ('row_list -> row COMMA row_list','row_list',3,'p_row_list','parser.py',87),
+  ('row_list -> row','row_list',1,'p_row_list','parser.py',88),
+  ('row -> LBRACKET num_list RBRACKET','row',3,'p_row','parser.py',96),
+  ('num_list -> NUM COMMA num_list','num_list',3,'p_num_list','parser.py',101),
+  ('num_list -> NUM','num_list',1,'p_num_list','parser.py',102),
 ]
