@@ -1,5 +1,5 @@
 import numpy as np
-from parser import Transpose, Determinant  # ← resolves yellow warning
+from parser import Transpose, Determinant  
 
 def generate_python(ast):
     code = ["import numpy as np"]

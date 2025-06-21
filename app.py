@@ -14,7 +14,7 @@ if st.button("Compile"):
     if dsl_input.strip() == "":
         st.warning("Please enter some DSL code.")
     else:
-        # Lex and parse
+        
         lexer.input(dsl_input)
         ast = parser.parse(dsl_input)
         
@@ -22,17 +22,17 @@ if st.button("Compile"):
             st.error("Parsing failed. Please check your syntax.")
         else:
             try:
-                # Semantic Analysis
+                
                 symtab = SymbolTable()
                 check_semantics(ast, symtab)
 
-                # Code Generation
+                
                 py_code = generate_python(ast)
 
                 st.subheader("✅ Generated Python Code")
                 st.code(py_code, language='python')
 
-                # Execute the generated Python code
+                
                 namespace = {}
                 with contextlib.redirect_stdout(io.StringIO()) as f:
                     exec(py_code, namespace)
@@ -41,7 +41,7 @@ if st.button("Compile"):
                 st.subheader("🧮 Output")
                 st.text(output)
 
-                # Show result variables if available
+                
                 display_vars = ['A', 'B', 'C_add', 'T', 'D_det', 'C_sub', 'C_div']
                 for var in display_vars:
                     if var in namespace:
