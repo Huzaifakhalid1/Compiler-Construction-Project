@@ -13,9 +13,4 @@ A domain-specific language for matrix operations, implemented using PLY.
 3. Run the compiler: `python main.py`
 4. Execute output: `python output.py`
 
-RUN 'streamlit run app.py' and paste sample.dsl code there for GUI
-
-1.	Paste you matrix in dsl on  sample.dsl
-2.	Run ‘python main.py’ on terminal.
-3.	After an output.py file created automatically Run ‘python output.py’ command on terminal.
-4.	Then Run ‘streamlit run app.py’ on terminal and paste dsl code same as in sample.dsl file there.
+5. RUN 'streamlit run app.py' and paste sample.dsl code there for GUI
