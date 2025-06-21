@@ -14,7 +14,8 @@ if st.button("Compile"):
     if dsl_input.strip() == "":
         st.warning("Please enter some DSL code.")
     else:
-        # Lex and parse
+        # Lex and parse  # Lex and parse
+        
         lexer.input(dsl_input)
         ast = parser.parse(dsl_input)
         
